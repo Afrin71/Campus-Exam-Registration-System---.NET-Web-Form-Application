@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+        <style>
+    /* Page background color */
+body {
+  background-color: #f5f8ff; /* light soft blue */
+  font-family: Arial, sans-serif;
+  color: #333; /* dark gray text */
+}
+
+/* Headings bold */
+h1, h2, h3 {
+  font-weight: bold;
+  color: #0a3d91; /* deep blue */
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Labels (table first column) slightly bold */
+td:first-child {
+  font-weight: 600;
+  color: #222;
+  padding-right: 10px;
+}
+
+/* Buttons styling */
+input[type="submit"], input[type="button"], button, .aspNetButton {
+  background-color: #0a3d91; /* dark blue */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* Button hover effect */
+input[type="submit"]:hover, input[type="button"]:hover, button:hover, .aspNetButton:hover {
+  background-color: #06306a; /* darker blue */
+}
+</style>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <!-- Main Heading -->
+        <h1 style="text-align:center; margin-bottom:20px;">OniTech Engineering Solutions</h1>
+        <h2 style="text-align:center; margin-bottom:20px;">Campus Recruiment Drive</h2>
+        <div style="border:1px solid #ccc; padding:10px; margin-bottom:15px; max-height:500px; overflow-y:auto;">
+    <h3>Rules and Regulations</h3>
+    <ul>
+        <li>Only students who have completed the registration process are allowed to appear for the exam.</li>
+        <li>Candidates must wear professional attire during the exam and college ID card is mandatory.</li>
+        <li>Candidates found copying or indulging in unfair practices will be immediately disqualified and will not be allowed to participate in the company’s future on-campus and off-campus hiring drives.</li>
+        <li>Candidates must bring their own pens, A4 sheet will be given.</li>
+        <li>Candidates should maintain silence and discipline inside the exam hall.</li>
+        <li>No electronic gadgets, mobile phones, smart watches are allowed inside the exam hall.</li>
+    </ul>
+
+    <h3>Additional Exam Details</h3>
+    <ul>
+        <li>All skill-based assessments will include an Aptitude section covering logical reasoning, quantitative ability, and verbal skills.</li>
+        <li>The total duration of the exam will be 2 hours. Candidates must manage their time accordingly.</li>
+        <li>The exam consists of 60 questions — 30 aptitude questions and 30 skill-based questions.</li>
+        <li>If applicable, the programming section includes 2 problems worth 15 marks each (total 30 marks).</li>
+    </ul>
+
+        <asp:CheckBox ID="chkAgree" runat="server" Text="I have read and agree to the Rules and Regulations and Exam Details." />
+        <asp:CustomValidator ID="cvAgree" runat="server" ErrorMessage="You must agree to the Rules and Regulations to proceed." OnServerValidate="cvAgree_ServerValidate" ForeColor="Red" Display="Dynamic" />
+        </div>
+        <div>
+            <table border="0" cellspacing="2" cellpadding="2"> 
+                <tr> 
+                    <td>
+                        Candidate Name 
+                    </td> 
+                    <td> 
+                        <asp:TextBox ID="txtCandidateName" runat="server"></asp:TextBox> 
+                        <asp:RequiredFieldValidator ID="RQCandidateName" runat="server" ControlToValidate="txtCandidateName" ErrorMessage="Please enter Student Name" ForeColor="Red"> </asp:RequiredFieldValidator> 
+                    </td> 
+                </tr> 
+                 <tr> 
+                    <td>
+                        Roll Number
+                    </td> 
+                    <td> 
+                       <asp:TextBox ID="txtRollNumber" runat="server"></asp:TextBox> 
+                      <asp:RequiredFieldValidator ID="RQRollNumber" runat="server" ControlToValidate="txtRollNumber" ErrorMessage="Please enter Roll Number" ForeColor="Red"> </asp:RequiredFieldValidator> 
+                       <asp:RegularExpressionValidator ID="REVRollNumber" runat="server" ErrorMessage="please enter correct Roll Number" ControlToValidate="txtRollNumber"  ValidationExpression="^[0-9]{2}[A-Z]{3}.*$" ForeColor="Red"></asp:RegularExpressionValidator> 
+                   </td> 
+                  </tr> 
+                 <tr> 
+                    <td> 
+                        Date of Birth 
+                    </td> 
+                    <td> 
+                        <asp:TextBox ID="txtDOB" runat="server"></asp:TextBox> 
+                        <asp:RangeValidator ID="Rvalid" runat="server" ControlToValidate="txtDOB" ErrorMessage="Date of Birth should not be greater  than current date" Type="Date" ForeColor="Red"></asp:RangeValidator> 
+                    </td> 
+                </tr> 
+                <tr> 
+                   <td>
+                       College Name
+                   </td> 
+                   <td>
+                        <asp:TextBox ID="txtCollegeName" runat="server"></asp:TextBox> 
+                        <asp:RequiredFieldValidator ID="RQCollegeName" runat="server" ControlToValidate="txtCollegeName" ErrorMessage="Please enter College Name" ForeColor="Red"> </asp:RequiredFieldValidator> 
+                   </td>   
+                </tr> 
+                <tr>
+                    <td> 
+                        Domain
+                   </td> 
+                   <td> 
+                      <asp:DropDownList ID="ddlDomain" runat="server"> 
+                      <asp:ListItem Text="--Select--" Value="--Select--"></asp:ListItem> 
+                      <asp:ListItem Text="IT" Value="IT"></asp:ListItem> 
+                      <asp:ListItem Text="CSE" Value="CSE"></asp:ListItem> 
+                      <asp:ListItem Text="EEE" Value="EEE"></asp:ListItem> 
+                      <asp:ListItem Text="ECE" Value="ECE"></asp:ListItem> 
+                      <asp:ListItem Text="Mech" Value="Mech"></asp:ListItem> 
+                      <asp:ListItem Text="Civil" Value="Civil"></asp:ListItem> 
+                      <asp:ListItem Text="ChE" Value="ChE"></asp:ListItem> 
+                     </asp:DropDownList> 
+                     <asp:RequiredFieldValidator ID="RQDomain" runat="server" InitialValue="--Select--" ControlToValidate="ddlDomain" ErrorMessage="Please select from the given Domain" ForeColor="Red"> </asp:RequiredFieldValidator> 
+                  </td> 
+               </tr> 
+                  <tr> 
+                    <td> 
+                        Email Address
+                    </td> 
+                    <td> 
+                        <asp:TextBox ID="txtEmailId" runat="server"></asp:TextBox> 
+                        <asp:RequiredFieldValidator ID="RqEmailId" runat="server" ControlToValidate="txtEmailId" ErrorMessage="Please enter the Email ID"  ForeColor="Red"> </asp:RequiredFieldValidator> 
+                        <asp:RegularExpressionValidator ID="REVEmailId" runat="server" ErrorMessage="please enter correct email id" ControlToValidate="txtEmailId"  ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red"></asp:RegularExpressionValidator> 
+                    </td> 
+                </tr> 
+                 <tr> 
+                    <td> 
+                        Phone Number
+                    </td> 
+                    <td> 
+                        <asp:TextBox ID="txtPhoneNumber" runat="server"></asp:TextBox> 
+                        <asp:RequiredFieldValidator ID="RqPhoneNumber" runat="server" ControlToValidate="txtPhoneNumber" ErrorMessage="Please enter Phone Number"  ForeColor="Red"> </asp:RequiredFieldValidator> 
+                        <asp:RegularExpressionValidator ID="REVPhoneNumber" runat="server" ErrorMessage="please enter correct Phone Number" ControlToValidate="txtPhoneNumber"  ValidationExpression="^[0-9]{10}$" ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:CustomValidator ID="CVPhoneNumber" runat="server" ControlToValidate="txtPhoneNumber" OnServerValidate="CVPhoneNumber_ServerValidate"  ErrorMessage="Phone Number should not be greater than 10 digits" ForeColor="Red"></asp:CustomValidator> 
+                    </td> 
+                </tr> 
+                <tr> 
+                    <td> 
+                        Exam Date
+                    </td> 
+                    <td> 
+                     <asp:Calendar ID="calExamDate" runat="server"></asp:Calendar>
+                     <asp:CustomValidator ID="cvExamDate" runat="server" ErrorMessage="Please select your Exam Date" ForeColor="Red" OnServerValidate="cvExamDate_ServerValidate"></asp:CustomValidator>
+                 </td> 
+                </tr> 
+                 <tr> 
+                   <td> 
+                       Exam Center
+                   </td> 
+                   <td> 
+                       <asp:DropDownList ID="ddlExamCenter" runat="server"> 
+                       <asp:ListItem Text="--Select--" Value="--Select--"></asp:ListItem> 
+                       <asp:ListItem Text="GV College of Engineering, Bangalore (Exam Hall A)" Value="GV College of Engineering, Bangalore (Exam Hall A)"></asp:ListItem> 
+                       <asp:ListItem Text="BCS University, Chennai (Main Auditorium)" Value="BCS University, Chennai (Main Auditorium)"></asp:ListItem> 
+                       <asp:ListItem Text="LLS College of Engineering, Hyderabad (Exam Block)" Value="LLS College of Engineering, Hyderabad (Exam Block)"></asp:ListItem> 
+                       <asp:ListItem Text="CEC Institute, Kochi, (Conference Hall)" Value="CEC Institute, Kochi, (Conference Hall)"></asp:ListItem> 
+                       <asp:ListItem Text="KETCO Institute, Trivandrum (Exam Hall 2)" Value="KETCO Institute, Trivandrum (Exam Hall 2)"></asp:ListItem> 
+                       <asp:ListItem Text ="Valleyview Institute of Engineering, Pune, Seminar Hall" Value="Valleyview Institute of Engineering, Pune, Seminar Hall"></asp:ListItem> 
+                       <asp:ListItem Text ="BEC College, Coimbatore (Auditorium)" Value="BEC College, Coimbatore (Auditorium)"></asp:ListItem> 
+                       <asp:ListItem Text ="HMN Engineering College, Madurai (Exam Hall B)" Value="HMN Engineering College, Madurai (Exam Hall B)"></asp:ListItem> 
+                       </asp:DropDownList> 
+                       <asp:RequiredFieldValidator ID="RQExamCenter" runat="server" InitialValue="--Select--" ControlToValidate="ddlExamCenter" ErrorMessage="Please select from the given Exam Center" ForeColor="Red"> </asp:RequiredFieldValidator> 
+                    </td> 
+                </tr> 
+                <tr> 
+                   <td> 
+                      Skill Based Assessments
+                   </td> 
+                   <td> 
+                      <asp:DropDownList ID="ddlAssessments" runat="server"> 
+                      <asp:ListItem Text="--Select--" Value="--Select--"></asp:ListItem> 
+                      <asp:ListItem Text="Software Development & Programming" Value="Software Development & Programming"></asp:ListItem> 
+                      <asp:ListItem Text="Cloud Computing" Value="Cloud Computing"></asp:ListItem> 
+                      <asp:ListItem Text="Cybersecurity" Value="Cybersecurity"></asp:ListItem> 
+                      <asp:ListItem Text="Networking" Value="Networking"></asp:ListItem> 
+                      <asp:ListItem Text="VLSI Design" Value="VLSI Design"></asp:ListItem> 
+                      <asp:ListItem Text ="Embedded Systems" Value="Embedded Systems"></asp:ListItem> 
+                      <asp:ListItem Text ="Digital Electronics & Analog Electronics" Value="Digital Electronics & Analog Electronics"></asp:ListItem> 
+                      <asp:ListItem Text ="Semiconductor & FPGA Programming" Value="Semiconductor & FPGA Programming"></asp:ListItem> 
+                      <asp:ListItem Text ="Robotics & Automation" Value="Robotics & Automation"></asp:ListItem>
+                      <asp:ListItem Text ="Thermodynamics & Fluid Mechanics" Value="Thermodynamics & Fluid Mechanics"></asp:ListItem> 
+                      <asp:ListItem Text ="Manufacturing Processes" Value="Manufacturing Processes"></asp:ListItem> 
+                      <asp:ListItem Text ="Construction Management" Value="Construction Management"></asp:ListItem> 
+                      <asp:ListItem Text ="Environmental Engineering" Value="Environmental Engineering"></asp:ListItem> 
+                      <asp:ListItem Text ="Concrete Technology" Value="Concrete Technology"></asp:ListItem> 
+                      <asp:ListItem Text ="Instrumentation & Control" Value="Instrumentation & Control"></asp:ListItem> 
+                      <asp:ListItem Text ="Process Engineering & Chemical Process Safety" Value="Process Engineering & Chemical Process Safety"></asp:ListItem> 
+                      </asp:DropDownList> 
+                      <asp:RequiredFieldValidator ID="RqAssessments" runat="server" InitialValue="--Select--" ControlToValidate="ddlAssessments" ErrorMessage="Please select from the given Assessments" ForeColor="Red"> </asp:RequiredFieldValidator> 
+                  </td> 
+                </tr>   
+                <tr> 
+                  <td></td> 
+                  <td> 
+                     <asp:Button ID="btnSubmit" runat="server" Text="Submit" CausesValidation="true" OnClick="btnSubmit_Click" />
+                  
+                    
+                     <asp:Button ID="btnClear" runat="server" Text="Clear" CausesValidation="true" OnClick="btnClear_Click" />
+                    </td> 
+                </tr> 
+            </table> 
+        </div>
+    </form>
+</body>
+</html>
